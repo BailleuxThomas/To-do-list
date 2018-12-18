@@ -24,12 +24,12 @@ if(isset($_POST['modification'])) {
         print_r($_POST['modification']);
         foreach ($parsed_json as $key => $value) {
            if($id == $value['id']){
-            $value['archive'] = false;
+            $parsed_json[$key]['archive'] = false;
             $newJsonString = json_encode($parsed_json);
            }
         }
     }
-    file_put_contents($document, $newJsonString);
+    file_put_contents('todo.json', $newJsonString);
 };
 
 ?>
