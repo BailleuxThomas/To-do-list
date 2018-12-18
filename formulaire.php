@@ -18,9 +18,28 @@ if (isset($_POST['tache'])) {
 $document = file_get_contents("todo.json");
 $parsed_json = json_decode($document, true);
 
+
+if(isset($_POST['modification'])) {
+    foreach ($_POST['modification'] as $id) {
+        print_r($_POST['modification']);
+        foreach ($parsed_json as $key => $value) {
+           if($id == $value['id']){
+            $value['archive'] = false;
+            $newJsonString = json_encode($parsed_json);
+           }
+        }
+    }
+    file_put_contents($document, $newJsonString);
+};
+
 ?>
 
 
+<!-- if ($value["archive"] == true) {
+            $value["archive"] = false;
+            $newJsonString = json_encode($value);
+            file_put_contents($document, $newJsonString);
+        } -->
 
 
 <!DOCTYPE html>
